@@ -1,0 +1,413 @@
+{% load static %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: #17120f;
+        color: #e8dcc8;
+        font-family: Georgia, serif;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px 8%;
+        border-bottom: 1px solid #49372b;
+    }
+
+    .logo {
+        font-size: 30px;
+        letter-spacing: 6px;
+        color: #d6b88a;
+    }
+
+    nav a {
+        color: #e8dcc8;
+        text-decoration: none;
+        margin-left: 25px;
+        font-size: 13px;
+    }
+
+        nav a:hover {
+            color: #c49a6c;
+        }
+
+    .hero {
+        min-height: 75vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+        .hero p {
+            color: #b69b7d;
+            letter-spacing: 4px;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 12vw, 120px);
+            letter-spacing: 12px;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 22px;
+            font-weight: normal;
+            font-style: italic;
+            color: #c5ae94;
+            margin-bottom: 35px;
+        }
+
+    .button {
+        display: inline-block;
+        border: 1px solid #b69b7d;
+        padding: 14px 30px;
+        color: #e8dcc8;
+        text-decoration: none;
+        letter-spacing: 2px;
+        transition: 0.3s;
+    }
+
+        .button:hover {
+            background: #b69b7d;
+            color: #17120f;
+        }
+
+    .menu {
+        padding: 80px 8%;
+        background: #211914;
+    }
+
+    .menu-title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+        .menu-title p {
+            color: #b69b7d;
+            letter-spacing: 4px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .menu-title h2 {
+            font-size: 42px;
+            font-weight: normal;
+            color: #d6b88a;
+        }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+    }
+
+    .product {
+        border: 1px solid #49372b;
+        padding: 28px;
+        transition: 0.3s;
+    }
+
+        .product:hover {
+            border-color: #b69b7d;
+            transform: translateY(-5px);
+        }
+
+        .product .icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .product h3 {
+            font-size: 21px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .product p {
+            color: #ad9a86;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+    .product-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .price {
+        color: #d6b88a;
+        white-space: nowrap;
+    }
+
+    .add-button {
+        background: transparent;
+        border: 1px solid #b69b7d;
+        color: #e8dcc8;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-family: Georgia, serif;
+    }
+
+        .add-button:hover {
+            background: #b69b7d;
+            color: #17120f;
+        }
+
+    .cart {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+        .cart h2 {
+            color: #d6b88a;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+    #cart-count {
+        color: #c49a6c;
+    }
+
+    .site-footer {
+        text-align: center;
+        padding: 45px 20px 20px;
+        color: #8d7864;
+        border-top: 1px solid #49372b;
+        margin-top: 60px;
+    }
+
+        .site-footer h2 {
+            color: #c5a47e;
+            letter-spacing: 4px;
+            font-size: 22px;
+        }
+
+    .footer-tagline {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+
+    .disclaimer {
+        max-width: 550px;
+        margin: 0 auto 30px;
+        padding: 15px;
+    }
+
+        .disclaimer h4 {
+            color: #c5a47e;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer p {
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+    .creator {
+        margin-top: 25px;
+    }
+
+        .creator strong {
+            color: #c5a47e;
+        }
+
+        .creator a {
+            display: inline-block;
+            margin-top: 8px;
+            color: #c5a47e;
+            text-decoration: none;
+        }
+
+            .creator a:hover {
+                color: #ffffff;
+            }
+
+    .copyright {
+        margin-top: 30px;
+        padding-top: 15px;
+        border-top: 1px solid #49372b;
+        font-size: 11px;
+    }
+
+    .creator a {
+        margin: 8px;
+        display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        nav a {
+            margin: 0 8px;
+        }
+
+        .hero h1 {
+            letter-spacing: 6px;
+        }
+
+        .menu-title h2 {
+            font-size: 34px;
+        }
+    }
+    .product img{
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+    .cake-image {
+        object-position: center bottom;
+    }
+</style>
+<nav>
+    <a href="#home">HOME</a>
+    <a href="#menu">MENU</a>
+    <a href="#cart">CART (<span id="cart-count">0</span>)</a>
+</nav>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <p>COFFEE · BOOKS · SILENCE</p>
+        <h1>RAVEN</h1>
+        <h2>A quiet place for restless minds.</h2>
+        <a href="#menu" class="button">EXPLORE OUR MENU</a>
+    </section>
+
+    <section class="menu" id="menu">
+        <div class="menu-title">
+            <p>MADE FOR YOUR QUIET MOMENTS</p>
+            <h2>Our Menu</h2>
+        </div>
+
+        <div class="products">
+
+            <div class="product">
+                <img src="{% static 'images/Espresso.jpg' %}" alt="Espresso"
+                <h3>Espresso</h3>
+                <p>Bold, rich and beautifully simple.</p>
+                <div class="product-bottom">
+                    <span class="price">€2.50</span>
+                    <button class="add-button" onclick="addToCart('Espresso', 2.50)">+ ADD</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="{% static 'images/cappuccino.jpg' %}" alt="cappuccino"
+                <h3>Cappuccino</h3>
+                <p>Espresso with silky steamed milk.</p>
+                <div class="product-bottom">
+                    <span class="price">€3.50</span>
+                    <button class="add-button" onclick="addToCart('Cappuccino', 3.50)">+ ADD</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="{% static 'images/black-tea.jpg' %}" alt="black-tea"
+                <h3>Black Tea</h3>
+                <p>A quiet classic for long afternoons.</p>
+                <div class="product-bottom">
+                    <span class="price">€2.00</span>
+                    <button class="add-button" onclick="addToCart('Black Tea', 2.00)">+ ADD</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="{% static 'images/chocolate-cake.jpg' %}" alt="chocolate-cake" class="cake-image">
+                <h3>Chocolate Cake</h3>
+                <p>Dark chocolate with a soft, rich center.</p>
+                <div class="product-bottom">
+                    <span class="price">€4.00</span>
+                    <button class="add-button" onclick="addToCart('Chocolate Cake', 4.00)">+ ADD</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cart" id="cart">
+        <h2>Your Cart</h2>
+        <p>Items in your cart: <span id="cart-count-bottom">0</span></p>
+        <p id="cart-total" style="margin-top: 15px;">Total: €0.00</p>
+        <p style="margin-top: 15px; color: #8d7864; font-size: 13px;">
+            Online order submission will be added in the next step.
+        </p>
+    </section>
+</main>
+
+<footer class="site-footer">
+
+    <h2>RAVEN CAFÉ</h2>
+
+    <p class="footer-tagline">
+        Coffee, Silence & Something More.
+    </p>
+
+    <div class="disclaimer">
+        <h4>Disclaimer</h4>
+
+        <p>
+            RAVEN Café is a fictional café created as a personal
+            web development project for educational and portfolio purposes.
+            No real products or services are offered, and no actual
+            orders or payments can be made through this website.
+        </p>
+    </div>
+
+    <div class="creator">
+        <p>Created by <strong>Arina</strong></p>
+
+        <a href="https://github.com/arinamzl" target="_blank">
+            GitHub
+        </a>
+
+        <a href="mailto:Arina.not.ariana.or.avina@gmail.com">
+            Email
+        </a>
+    </div>
+
+    <div class="copyright">
+        © 2026 RAVEN CAFÉ. All rights reserved.
+    </div>
+
+</footer>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push({ name: name, price: price });
+        total += price;
+
+        document.getElementById("cart-count").textContent = cart.length;
+        document.getElementById("cart-count-bottom").textContent = cart.length;
+        document.getElementById("cart-total").textContent =
+            "Total: €" + total.toFixed(2);
+
+        alert(name + " added to your cart!");
+    }
+</script>

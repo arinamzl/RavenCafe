@@ -1,0 +1,18 @@
+# Python
+pycache/
+*.py[cod]
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Secret files
+.env
+
+# Django
+db.sqlite3
+media/
+
+# Visual Studio
+.vs/
