@@ -2,7 +2,7 @@
 
 A fictional café website built as a personal web development project.
 
-About the Project
+About the Project:
 
 RAVEN Café is a simple café website where visitors can explore a small menu of drinks and desserts.
 
