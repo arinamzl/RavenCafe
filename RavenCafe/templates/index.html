@@ -281,6 +281,15 @@
     .cake-image {
         object-position: center bottom;
     }
+    .category-title {
+        font-size: 28px;
+        color: #d6b58c;
+        margin: 50px 0 25px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        border-bottom: 1px solid #555;
+        padding-bottom: 12px;
+    }
 </style>
 <nav>
     <a href="#home">HOME</a>
@@ -302,48 +311,45 @@
             <p>MADE FOR YOUR QUIET MOMENTS</p>
             <h2>Our Menu</h2>
         </div>
+        <div class="menu">
 
-        <div class="products">
+            {% for category in categories %}
 
-            <div class="product">
-                <img src="{% static 'images/Espresso.jpg' %}" alt="Espresso"
-                <h3>Espresso</h3>
-                <p>Bold, rich and beautifully simple.</p>
-                <div class="product-bottom">
-                    <span class="price">€2.50</span>
-                    <button class="add-button" onclick="addToCart('Espresso', 2.50)">+ ADD</button>
+            <h2 class="category-title">{{ category.name }}</h2>
+
+            <div class="products">
+
+                {% for product in products %}
+
+                {% if product.category == category %}
+
+                <div class="product">
+
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+
+                    <div class="product-bottom">
+                        <span class="price">€{{ product.price }}</span>
+
+                        <button class="add-button"
+                                onclick="addToCart('{{ product.name|escapejs }}', {{ product.price }})">
+                            + ADD
+                        </button>
+                    </div>
+
                 </div>
+
+                {% endif %}
+
+                {% endfor %}
+
             </div>
 
-            <div class="product">
-                <img src="{% static 'images/cappuccino.jpg' %}" alt="cappuccino"
-                <h3>Cappuccino</h3>
-                <p>Espresso with silky steamed milk.</p>
-                <div class="product-bottom">
-                    <span class="price">€3.50</span>
-                    <button class="add-button" onclick="addToCart('Cappuccino', 3.50)">+ ADD</button>
-                </div>
-            </div>
-
-            <div class="product">
-                <img src="{% static 'images/black-tea.jpg' %}" alt="black-tea"
-                <h3>Black Tea</h3>
-                <p>A quiet classic for long afternoons.</p>
-                <div class="product-bottom">
-                    <span class="price">€2.00</span>
-                    <button class="add-button" onclick="addToCart('Black Tea', 2.00)">+ ADD</button>
-                </div>
-            </div>
-
-            <div class="product">
-                <img src="{% static 'images/chocolate-cake.jpg' %}" alt="chocolate-cake" class="cake-image">
-                <h3>Chocolate Cake</h3>
-                <p>Dark chocolate with a soft, rich center.</p>
-                <div class="product-bottom">
-                    <span class="price">€4.00</span>
-                    <button class="add-button" onclick="addToCart('Chocolate Cake', 4.00)">+ ADD</button>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
     </section>

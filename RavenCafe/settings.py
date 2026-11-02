@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'products',
 ]
 
 # Middleware framework
@@ -113,3 +114,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[Path(BASE_DIR) / "RavenCafe"/ "static",]
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
