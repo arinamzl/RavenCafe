@@ -333,7 +333,7 @@
                     <p>{{ product.description }}</p>
 
                     <div class="product-bottom">
-                        <span class="price">€{{ product.price }}</span>
+                        <span class="price">{{ product.price }} T</span>
 
                         <button class="add-button"
                                 onclick="addToCart('{{ product.name|escapejs }}', {{ product.price }})">
