@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'orders',
+    'django.contrib.humanize',
 ]
 
 # Middleware framework

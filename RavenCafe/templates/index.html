@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <style>
     * {
         margin: 0;
@@ -333,12 +334,16 @@
                     <p>{{ product.description }}</p>
 
                     <div class="product-bottom">
-                        <span class="price">{{ product.price }} T</span>
+                        <span class="price">{{ product.price|floatformat:0|intcomma }} T</span>
 
-                        <button class="add-button"
-                                onclick="addToCart('{{ product.name|escapejs }}', {{ product.price }})">
-                            + ADD
-                        </button>
+                        <form method="post" action="{% url 'add_to_cart' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                            <button type="submit" class="add-button">
+                                + ADD
+                            </button>
+                        </form>
                     </div>
 
                 </div>
@@ -356,10 +361,31 @@
 
     <section class="cart" id="cart">
         <h2>Your Cart</h2>
-        <p>Items in your cart: <span id="cart-count-bottom">0</span></p>
-        <p id="cart-total" style="margin-top: 15px;">Total: €0.00</p>
+
+        <p>
+            Items in your cart:
+            <span id="cart-count-bottom">{{ cart_count }}</span>
+        </p>
+
+        {% for item in cart_items %}
+        <div class="cart-item">
+            <p>
+                {{ item.product.name }}
+                × {{ item.quantity }}
+            </p>
+
+            <p>{{ item.subtotal|floatformat:0|intcomma }} T</p>
+        </div>
+        {% empty %}
+        <p>Your cart is empty.</p>
+        {% endfor %}
+
+        <p id="cart-total" style="margin-top: 15px;">
+            Total: {{ cart_total|floatformat:0|intcomma }} T
+        </p>
+
         <p style="margin-top: 15px; color: #8d7864; font-size: 13px;">
-            Online order submission will be added in the next step.
+            thank you for your order!
         </p>
     </section>
 </main>
@@ -412,7 +438,7 @@
         document.getElementById("cart-count").textContent = cart.length;
         document.getElementById("cart-count-bottom").textContent = cart.length;
         document.getElementById("cart-total").textContent =
-            "Total: €" + total.toFixed(2);
+            "Total: T" + total.toFixed(2);
 
         alert(name + " added to your cart!");
     }
