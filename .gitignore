@@ -17,3 +17,5 @@ media/
 # Visual Studio
 .vs/
 *.pyproj.user
+
+db.sqlite3
