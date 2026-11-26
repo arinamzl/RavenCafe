@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RavenCafe - Checkout</title>
+</head>
+
+<body>
+
+    <h1>Checkout</h1>
+
+    {% if success %}
+
+    <h2>Order placed successfully!</h2>
+    <p>Your order number is: {{ order_id }}</p>
+    <p>Thank you for ordering from RavenCafe.</p>
+
+    <a href="/">Back to Menu</a>
+
+    {% else %}
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <h2>Your Order</h2>
+
+    {% for item in cart_items %}
+
+    <p>
+        {{ item.product.name }}
+        × {{ item.quantity }}
+        —
+        {{ item.subtotal }} T
+    </p>
+
+    {% empty %}
+
+    <p>Your cart is empty.</p>
+
+    {% endfor %}
+
+    <h3>Total: {{ cart_total }} T</h3>
+
+    {% if cart_items %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Your Name:</label>
+        <input type="text"
+               name="customer_name"
+               required>
+
+        <br><br>
+
+        <label>Phone Number:</label>
+        <input type="tel"
+               name="customer_phone"
+               required>
+
+        <br><br>
+
+        <label>Pickup Time:</label>
+        <input type="datetime-local"
+               name="pickup_time"
+               required>
+
+        <br><br>
+
+        <button type="submit">
+            Place Order
+        </button>
+
+    </form>
+
+    {% endif %}
+
+    {% endif %}
+
+</body>
+</html>

@@ -12,13 +12,13 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'customer_name',
-        'phone_number',
+        'customer_phone',
         'pickup_time',
         'total_price',
-        'status',
+        'created_at',
     )
 
-    list_filter = ('status', 'pickup_time')
-    search_fields = ('customer_name', 'phone_number')
+    list_filter = ('pickup_time',)
+    search_fields = ('customer_name', 'customer_phone')
 
     inlines = [OrderItemInline]

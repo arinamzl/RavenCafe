@@ -376,6 +376,9 @@
 
             <p>{{ item.subtotal|floatformat:0|intcomma }} T</p>
         </div>
+        <a href="{% url 'checkout' %}" class="checkout-btn">
+            Proceed to Checkout
+        </a>
         {% empty %}
         <p>Your cart is empty.</p>
         {% endfor %}

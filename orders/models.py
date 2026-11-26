@@ -1,38 +1,19 @@
 from django.db import models
-from products.models import Product
 
 
 class Order(models.Model):
 
-    STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('Preparing', 'Preparing'),
-        ('Ready', 'Ready'),
-        ('Completed', 'Completed'),
-        ('Cancelled', 'Cancelled'),
-    ]
-
     customer_name = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=20)
+    customer_phone = models.CharField(max_length=20)
 
     pickup_time = models.DateTimeField()
 
-    total_price = models.DecimalField(
-        max_digits=8,
-        decimal_places=2,
-        default=0
-    )
-
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='Pending'
-    )
+    total_price = models.DecimalField(max_digits=10,decimal_places=2,default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def str(self):
-        return f"Order #{self.id} - {self.customer_name}"
+        return f"Order {self.id} - {self.customer_name}"
 
 
 class OrderItem(models.Model):
@@ -44,16 +25,19 @@ class OrderItem(models.Model):
     )
 
     product = models.ForeignKey(
-        Product,
-        on_delete=models.PROTECT
+        'products.Product',
+        on_delete=models.SET_NULL,
+        null=True
     )
 
-    quantity = models.PositiveIntegerField(default=1)
+    product_name = models.CharField(max_length=100)
 
-    price = models.DecimalField(
-        max_digits=6,
+    unit_price = models.DecimalField(
+        max_digits=10,
         decimal_places=2
     )
 
+    quantity = models.PositiveIntegerField()
+
     def str(self):
-        return f"{self.product.name} x {self.quantity}"
+        return f"{self.product_name} x {self.quantity}"

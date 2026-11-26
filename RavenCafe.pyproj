@@ -45,6 +45,7 @@
     <Content Include="RavenCafe\static\images\coffee.jpg" />
     <Content Include="RavenCafe\static\images\Espresso.jpg" />
     <Content Include="RavenCafe\templates\index.html" />
+    <Content Include="RavenCafe\templates\checkout.html" />
     <Content Include="requirements.txt" />
     <Content Include=".gitignore" />
   </ItemGroup>
